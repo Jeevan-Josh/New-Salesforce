@@ -1,0 +1,56 @@
+<template>
+
+    <article class="slds-card slds-card_boundary slds-m-bottom_medium">
+
+        <div class="slds-card__header slds-grid">
+
+            <div class="slds-media slds-media_center slds-has-flexi-truncate">
+
+                <div class="slds-media__body">
+
+                    <h2 class="slds-card__header-title">
+                        {job.jobTitle}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+
+            <p class="slds-m-bottom_small">
+                <strong>Company:</strong>
+                {job.companyName}
+            </p>
+
+            <p class="slds-m-bottom_small">
+                <strong>Minimum CGPA:</strong>
+                {job.minimumCGPA}
+            </p>
+
+            <p class="slds-m-bottom_small">
+                <strong>Closing Date:</strong>
+                {job.closingDate}
+            </p>
+
+            <lightning-button
+                label="View Details"
+                variant="brand"
+                onclick={handleViewDetails}>
+            </lightning-button>
+
+            <lightning-button
+                label="Apply"
+                variant="success"
+                class="slds-m-left_small"
+                onclick={handleApply}
+                disabled={isApplying}>
+            </lightning-button>
+
+        </div>
+
+    </article>
+
+</template>
