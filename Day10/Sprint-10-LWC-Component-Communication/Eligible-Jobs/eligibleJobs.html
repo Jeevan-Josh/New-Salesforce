@@ -1,0 +1,112 @@
+<template>
+
+    <lightning-card
+        title="Eligible Jobs"
+        icon-name="standard:job_profile">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Application Success Message -->
+            <template if:true={successMessage}>
+                <div class="slds-notify slds-notify_alert slds-alert_success slds-m-bottom_medium">
+                {successMessage}
+                </div>
+            </template>
+
+            <!-- Application Error Message -->
+            <template if:true={applicationError}>
+                <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium">
+                {applicationError}
+                </div>
+            </template>
+
+
+            <!-- Loading State -->
+            <template if:true={isLoading}>
+
+                <div class="slds-align_absolute-center slds-p-around_large">
+
+                    <lightning-spinner
+                        alternative-text="Loading eligible jobs"
+                        size="medium">
+                    </lightning-spinner>
+
+                    <span class="slds-m-left_small">
+                        Loading eligible jobs...
+                    </span>
+
+                </div>
+
+            </template>
+
+
+            <!-- Error State -->
+            <template if:true={error}>
+
+                <div class="slds-text-color_error slds-p-around_medium">
+
+                    Unable to load eligible jobs.
+                    Please try again later.
+
+                </div>
+
+            </template>
+
+
+            <!-- Success State -->
+            <template if:false={isLoading}>
+
+                <template if:false={error}>
+
+                    <!-- Jobs Available -->
+                    <template if:true={jobs.length}>
+
+                       <template
+    for:each={jobs}
+    for:item="job">
+
+    <c-job-card
+        key={job.id}
+        job={job}
+        is-applying={isApplying}
+        onviewdetails={handleViewDetails}
+        onapply={handleApply}>
+    </c-job-card>
+
+</template>
+
+                    </template>
+
+
+                    <!-- Empty State -->
+                    <template if:false={jobs.length}>
+
+                        <div class="slds-align_absolute-center slds-p-around_large">
+
+                            <p>
+                                No eligible jobs are currently available.
+                            </p>
+
+                        </div>
+
+                    </template>
+
+
+                    <!-- Selected Job Details -->
+                    <template if:true={selectedJob}>
+
+                        <c-eligible-job-details
+                            job={selectedJob}>
+                        </c-eligible-job-details>
+
+                    </template>
+
+                </template>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>
